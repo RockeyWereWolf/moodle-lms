@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  db:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: your_password_here
+      MYSQL_DATABASE: moodle
+    volumes:
+      - db-data:/var/lib/mysql
+  moodle:
+    build: .
+    depends_on:
+      - db
+    ports:
+      - "80:80"
+    volumes:
+      - moodle-data:/var/www/html
+    environment:
+      MOODLE_DB_TYPE: mysqli
+      MOODLE_DB_HOST: db
+      MOODLE_DB_NAME: moodle
+      MOODLE_DB_USER: root
+      MOODLE_DB_PASS: your_password_here
+volumes:
+  db-data:
+  moodle-data:
