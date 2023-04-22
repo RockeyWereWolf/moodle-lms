@@ -14,7 +14,7 @@ services:
     volumes:
       - db-data:/var/lib/mysql
   moodle:
-    image: moodlehq/moodle-php-apache:php74
+    image: moodlehq/moodle-php-apache
     restart: always
     ports:
       - 8080:80
