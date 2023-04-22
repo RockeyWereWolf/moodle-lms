@@ -19,4 +19,4 @@ jobs:
           args: -p project up -d
           ssh_public_key: ${{ secrets.SSH_KEY }}
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          compose_file_path: docker-compose.yml
+          compose_file_path: moodle/docker-compose.yml
