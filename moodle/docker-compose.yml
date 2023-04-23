@@ -8,6 +8,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: your_password_here
       MYSQL_DATABASE: moodle
+    network_mode: bridge
     volumes:
       - db-data:/var/lib/mysql
   moodle:
@@ -19,6 +20,8 @@ services:
       - "8080:8080"
     volumes:
       - moodle-data:/var/www/html
+    command: tail -f /dev/null
+    network_mode: bridge
     environment:
       MOODLE_DB_TYPE: mysqli
       MOODLE_DB_HOST: db
