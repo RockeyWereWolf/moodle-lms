@@ -3,6 +3,7 @@ services:
   db:
     image: mysql:8.0
     command: --default-authentication-plugin=mysql_native_password
+    pull_policy: build
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: your_password_here
@@ -10,11 +11,12 @@ services:
     volumes:
       - db-data:/var/lib/mysql
   moodle:
+    pull_policy: build
     build: .
     depends_on:
       - db
     ports:
-      - "80:80"
+      - "8080:8080"
     volumes:
       - moodle-data:/var/www/html
     environment:
@@ -23,6 +25,9 @@ services:
       MOODLE_DB_NAME: moodle
       MOODLE_DB_USER: root
       MOODLE_DB_PASS: your_password_here
+    deploy:
+      restart_policy:
+        condition: on-failure
 volumes:
   db-data:
   moodle-data:
