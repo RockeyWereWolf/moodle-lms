@@ -7,6 +7,7 @@ RUN apt-get update && \
     docker-php-ext-enable xdebug && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
     rm -rf /var/lib/apt/lists/*
+EXPOSE 8080
 COPY moodle-config.php /var/www/html/config.php
 COPY moodle-docker-entrypoint.sh /usr/local/bin/moodle-docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/moodle-docker-entrypoint.sh
