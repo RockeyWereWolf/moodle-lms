@@ -10,6 +10,18 @@ RUN apt-get update && \
     curl -sSL https://download.moodle.org/download.php/direct/stable402/moodle-4.2.tgz | tar -xzf - -C /usr/src/moodle --strip-components=1 && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
     rm -rf /var/lib/apt/lists/*
+# set recommended PHP.ini settings
+RUN { \
+    echo 'opcache.memory_consumption=128'; \
+    echo 'opcache.max_accelerated_files=10000'; \
+    echo 'opcache.revalidate_freq=60'; \
+    echo 'opcache.use_cwd=1'; \
+    echo 'opcache.validate_timestamps=1'; \
+    echo 'opcache.save_comments=1'; \
+    echo 'opcache.enable_file_override=0'; \
+  } > /usr/local/etc/php/conf.d/opcache-recommended.ini
+
+RUN a2enmod rewrite expires
 EXPOSE 8080
 COPY moodle-config.php /var/www/html/config.php
 COPY moodle-docker-entrypoint.sh /usr/local/bin/moodle-docker-entrypoint.sh
