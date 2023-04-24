@@ -32,25 +32,6 @@ services:
       MOODLE_DB_PASSWORD: password
       MOODLE_WWW_ROOT: ${MOODLE_WWW_ROOT:-http://localhost:8080}
       MOODLE_DATA_ROOT: /var/www/moodledata
-    labels:
-      cron.moodle.command: "/usr/local/bin/php /var/www/html/admin/cli/cron.php"
-      cron.moodle.interval: "every minute"
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    ports:
-      - "8081:80"
-    links:
-      - db:database
-    environment:
-      PMA_HOST: database
-  tasks:
-    image: funkyfuture/deck-chores:1
-    restart: unless-stopped
-    environment:
-      TIMEZONE: Europe/Paris
-      LABEL_NAMESPACE: cron
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
 volumes:
     db_data:
       driver: local
