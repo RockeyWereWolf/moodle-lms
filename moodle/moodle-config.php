@@ -2,18 +2,19 @@
 unset($CFG);
 global $CFG;
 $CFG = new stdClass();
-$CFG->dbtype    = getenv('MOODLE_DB_TYPE');
+$CFG->dbtype    = 'mysqli';
 $CFG->dblibrary = 'native';
-$CFG->dbhost    = getenv('MOODLE_DB_HOST');
-$CFG->dbname    = getenv('MOODLE_DB_NAME');
-$CFG->dbuser    = getenv('MOODLE_DB_USER');
-$CFG->dbpass    = getenv('MOODLE_DB_PASS');
+$CFG->dbhost    = 'database';
+$CFG->dbname    = 'moodle';
+$CFG->dbuser    = 'moodle';
+$CFG->dbpass    = 'password';
 $CFG->prefix    = 'mdl_';
 $CFG->dboptions = array (
   'dbpersist' => 0,
   'dbsocket' => 0,
+  'dbport'    => '3306',
 );
-$CFG->wwwroot   = 'http://localhost';
+$CFG->wwwroot   = 'hhttp://localhost:8080';
 $CFG->dataroot  = '/var/www/html/moodledata';
 $CFG->admin     = 'admin';
 $CFG->directorypermissions = 02777;
