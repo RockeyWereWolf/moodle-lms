@@ -23,6 +23,10 @@ RUN { \
     echo 'opcache.enable_file_override=0'; \
   } > /usr/local/etc/php/conf.d/opcache-recommended.ini
 
+RUN { \
+     max_input_vars = 5000
+  } > /usr/local/etc/php/conf.d/php.ini
+
 RUN a2enmod rewrite expires
 
 VOLUME ["/var/www/html", "/var/www/moodledata"]
