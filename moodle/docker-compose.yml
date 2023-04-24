@@ -12,9 +12,7 @@ services:
     pull_policy: build
     restart: always
   moodle:
-    build: .
-    depends_on:
-      - db
+    image: aesr/moodle
     ports:
       - "8080:80"
     links:
