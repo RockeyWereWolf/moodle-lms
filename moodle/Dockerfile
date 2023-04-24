@@ -28,7 +28,7 @@ RUN a2enmod rewrite expires
 VOLUME ["/var/www/html", "/var/www/moodledata"]
 
 
-chown -R www-data:www-data /usr/src/moodle
+RUN chown -R www-data:www-data /usr/src/moodle
 
 COPY moodle-docker-entrypoint.sh /usr/local/bin/moodle-docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/moodle-docker-entrypoint.sh
