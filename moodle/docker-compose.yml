@@ -12,7 +12,7 @@ services:
     pull_policy: build
     restart: always
   moodle:
-    image: aesr/moodle
+    image: aesr/moodle:3.6
     ports:
       - "8080:80"
     links:
