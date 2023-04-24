@@ -27,3 +27,4 @@ COPY moodle-config.php /var/www/html/config.php
 COPY moodle-docker-entrypoint.sh /usr/local/bin/moodle-docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/moodle-docker-entrypoint.sh
 ENTRYPOINT ["moodle-docker-entrypoint.sh"]
+CMD ["apache2-foreground"]
