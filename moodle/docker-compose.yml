@@ -32,6 +32,9 @@ services:
       MOODLE_DB_PASSWORD: password
       MOODLE_WWW_ROOT: ${MOODLE_WWW_ROOT:-http://129.151.196.195:8080}
       MOODLE_DATA_ROOT: /var/www/moodledata
+    labels:
+      cron.moodle.command: "/usr/local/bin/php /var/www/html/admin/cli/cron.php"
+      cron.moodle.interval: "every minute"
 volumes:
     db_data:
       driver: local
