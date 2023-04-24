@@ -39,4 +39,3 @@ services:
         condition: on-failure
 volumes:
   db-data:
-    driver: local
