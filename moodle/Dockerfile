@@ -33,5 +33,7 @@ COPY moodle-docker-entrypoint.sh /usr/local/bin/moodle-docker-entrypoint.sh
 
 RUN chmod +x /usr/local/bin/moodle-docker-entrypoint.sh
 
+RUN chmod +x /var/www/
+
 ENTRYPOINT ["moodle-docker-entrypoint.sh"]
 CMD ["apache2-foreground"]
