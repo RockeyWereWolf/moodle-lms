@@ -31,5 +31,7 @@ RUN chown -R www-data:www-data /usr/src/moodle
 
 COPY moodle-docker-entrypoint.sh /usr/local/bin/moodle-docker-entrypoint.sh
 
+RUN chmod +x /usr/local/bin/moodle-docker-entrypoint.sh
+
 ENTRYPOINT ["moodle-docker-entrypoint.sh"]
 CMD ["apache2-foreground"]
