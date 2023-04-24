@@ -43,7 +43,7 @@ RUN set -ex; \
   rm moodle.tgz; \
   chown -R www-data:www-data /usr/src/moodle
 
-COPY docker-entrypoint.sh /usr/local/bin/
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["apache2-foreground"]
