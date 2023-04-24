@@ -1,18 +1,15 @@
 FROM php:8.2-apache
-RUN set -ex; \
-  \
-  apt-get update; \
-  apt-get install -y \
-    libzip-dev \
-    libicu-dev \
-    libpng-dev \
-    libxml2-dev \
-    zlib1g-dev \
-  ; \
-  rm -rf /var/lib/apt/lists/*; \
-  \
-  docker-php-ext-install gd mysqli opcache xmlrpc intl soap zip
-
+RUN apt-get update && \
+    apt-get install -y rsync libfreetype6-dev libjpeg-dev libzip-dev libpng-dev libicu-dev libxml2-dev unzip && \
+    docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ && \
+    docker-php-ext-install mysqli pdo_mysql zip gd intl soap opcache && \
+    pecl install xdebug && \
+    docker-php-ext-enable xdebug && \
+    rm -rf /usr/src/moodle && \
+    mkdir -p /usr/src/moodle && \
+    curl -sSL https://download.moodle.org/download.php/direct/stable402/moodle-4.2.tgz | tar -xzf - -C /usr/src/moodle --strip-components=1 && \
+    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
+    rm -rf /var/lib/apt/lists/*
 # set recommended PHP.ini settings
 # see https://secure.php.net/manual/en/opcache.installation.php
 # see https://docs.moodle.org/36/en/OPcache
@@ -30,13 +27,8 @@ RUN a2enmod rewrite expires
 
 VOLUME ["/var/www/html", "/var/www/moodledata"]
 
-ENV MOODLE_BRANCH 38
-ENV MOODLE_RELEASE 3.8.1
-ENV MOODLE_SHA256 c1830d66a6e64ea466be85292f4b6ded1151324d36536e96b889d36502e6e2f7
 
-RUN set -ex; \
-  curl -sSL https://download.moodle.org/download.php/direct/stable402/moodle-4.2.tgz | tar -xzf - -C /usr/src/moodle --strip-components=1 && \
-  chown -R www-data:www-data /usr/src/moodle
+chown -R www-data:www-data /usr/src/moodle
 
 COPY moodle-docker-entrypoint.sh /usr/local/bin/moodle-docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/moodle-docker-entrypoint.sh
