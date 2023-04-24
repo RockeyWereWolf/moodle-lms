@@ -20,7 +20,6 @@ services:
       - "8080:80"
     volumes:
       - moodle-data:/var/www/html
-    command: tail -f /dev/null
     network_mode: bridge
     environment:
       MOODLE_DB_TYPE: mysqli
