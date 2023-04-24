@@ -27,15 +27,15 @@ RUN a2enmod rewrite expires
 
 VOLUME ["/var/www/html", "/var/www/moodledata"]
 
-RUN chown -R www-data:www-data /usr/src/moodle
+RUN chown -R www-data:www-data /usr/src/moodle/
 
-RUN chown -R www-data:www-data /var/www
+RUN chown -R www-data:www-data /var/www/
 
 COPY moodle-docker-entrypoint.sh /usr/local/bin/moodle-docker-entrypoint.sh
 
 RUN chmod +x /usr/local/bin/moodle-docker-entrypoint.sh
 
-RUN chmod -R 775 /var/www
+RUN chmod -R 775 /var/www/
 
 ENTRYPOINT ["moodle-docker-entrypoint.sh"]
 CMD ["apache2-foreground"]
