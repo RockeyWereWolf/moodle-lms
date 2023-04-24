@@ -29,7 +29,7 @@ VOLUME ["/var/www/html", "/var/www/moodledata"]
 
 RUN chown -R www-data:www-data /usr/src/moodle
 
-COPY moodle-docker-entrypoint.sh /usr/local/bin/moodle-docker-entrypoint.sh
+COPY moodle-docker-entrypoint.sh /usr/local/bin/
 
 ENTRYPOINT ["moodle-docker-entrypoint.sh"]
 CMD ["apache2-foreground"]
