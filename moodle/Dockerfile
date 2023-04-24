@@ -38,7 +38,8 @@ RUN set -ex; \
   curl -sSL https://download.moodle.org/download.php/direct/stable402/moodle-4.2.tgz | tar -xzf - -C /usr/src/moodle --strip-components=1 && \
   chown -R www-data:www-data /usr/src/moodle
 
-COPY docker-entrypoint.sh /usr/local/bin/
+COPY moodle-docker-entrypoint.sh /usr/local/bin/moodle-docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/moodle-docker-entrypoint.sh
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["apache2-foreground"]
