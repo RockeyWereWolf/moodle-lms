@@ -30,7 +30,7 @@ services:
       MOODLE_DB_NAME: moodle
       MOODLE_DB_USER: moodle
       MOODLE_DB_PASSWORD: password
-      MOODLE_WWW_ROOT: ${MOODLE_WWW_ROOT:-http://localhost:8080}
+      MOODLE_WWW_ROOT: ${MOODLE_WWW_ROOT:-http://129.151.196.195:8080}
       MOODLE_DATA_ROOT: /var/www/moodledata
 volumes:
     db_data:
