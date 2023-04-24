@@ -35,6 +35,22 @@ services:
     labels:
       cron.moodle.command: "/usr/local/bin/php /var/www/html/admin/cli/cron.php"
       cron.moodle.interval: "every minute"
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8081:80"
+    links:
+      - db:database
+    environment:
+      PMA_HOST: database
+  tasks:
+    image: funkyfuture/deck-chores:1
+    restart: unless-stopped
+    environment:
+      TIMEZONE: Europe/Paris
+      LABEL_NAMESPACE: cron
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
 volumes:
     db_data:
       driver: local
